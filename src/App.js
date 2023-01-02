@@ -66,12 +66,12 @@ function App() {
               value={inputVal}
               onChange={(e) => handleChange(e)}
             ></input>
-            <button
-              className={disabledBtn === true ? "disableBtn" : ""}
-              type="submit"
-            >
-              Add
-            </button>
+
+            {incompleteItems.length < 7 ? (
+              <button type="submit">Add</button>
+            ) : (
+              <div className="alert-message">Too many tasks!</div>
+            )}
           </form>
 
           <div className="bottom-btns">
@@ -85,7 +85,7 @@ function App() {
         </div>
         <div className="list-area">
           {activeLinkClicked ? (
-            <div className="active-items">
+            <>
               {incompleteItems.map((item) => (
                 <div key={item.id} className="itemRow">
                   <button type="submit" onClick={() => updateArr(item)}>
@@ -94,11 +94,12 @@ function App() {
                   <li className="list-item">{item.inputVal}</li>
                 </div>
               ))}
-            </div>
+            </>
           ) : (
             <div className="completed-items">
               {completeItems.map((item) => (
-                <div key={item.id} className="completed-items">
+                <div key={item.id} className="itemRow">
+                  <p className="green">&#x2714;</p>
                   <li className="list-item">{item.inputVal}</li>
                 </div>
               ))}
